@@ -11,20 +11,34 @@ keywords = ["taskbar", "interfaces", "ui"]
 categories = ["gui"]
 
 [dependencies]
-raw-window-handle = "0"
+raw-window-handle = "0.5"
 
 [target.'cfg(all(unix, not(target_os="macos")))'.dependencies]
 lazy_static = "1"
 x11-dl = "2"
 dbus = "0.9"
-x11rb = { version = "0.9", features = ["allow-unsafe-code", "dl-libxcb"] }
+x11rb = { version = "0.11", features = ["allow-unsafe-code", "dl-libxcb"] }
 
 [target.'cfg(target_os = "windows")'.dependencies]
-windows = "0.19"
+windows = { version = "*", features = [
+    "Win32_Foundation",
+    "Win32_System_Com",
+    "Win32_System_SystemServices",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+] }
 
 [target.'cfg(target_os = "windows")'.build-dependencies]
-windows = "0.19"
+windows = { version = "*", features = [
+    "Win32_Foundation",
+    "Win32_System_Com",
+    "Win32_System_SystemServices",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+] }
 
 [dev-dependencies]
-winit = "0.25"
-glutin = "0.27"
+winit = "0.28"
+glutin = "0.30"
