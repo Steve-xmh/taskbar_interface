@@ -38,7 +38,7 @@ impl Manager {
             dirty_count_visible: true,
             dirty_urgent: true,
         };
-        m.update();
+        let _ = m.update();
         Ok(m)
     }
 
