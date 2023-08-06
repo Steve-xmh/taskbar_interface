@@ -1,6 +1,6 @@
 use std::mem;
 
-use raw_window_handle::RawWindowHandle;
+use raw_window_handle::{RawWindowHandle, RawDisplayHandle};
 use windows::Win32::{
     Foundation::HWND,
     System::Com::{CoCreateInstance, CoInitializeEx, CLSCTX_ALL, COINIT_MULTITHREADED},
