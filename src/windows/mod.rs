@@ -24,7 +24,7 @@ pub struct TaskbarIndicator {
 }
 
 impl TaskbarIndicator {
-    pub fn new(window: RawWindowHandle) -> Result<Self, Box<dyn std::error::Error>> {
+    pub fn new(window: RawWindowHandle, _display: RawDisplayHandle) -> Result<Self, Box<dyn std::error::Error>> {
         let hwnd = match window {
             RawWindowHandle::Win32(handle) => HWND(handle.hwnd as isize),
             h => unimplemented!("{:?}", h),

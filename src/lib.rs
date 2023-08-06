@@ -3,7 +3,7 @@
 //! would remember the indicator state when the user opens your app by second time. In that case if you
 //! initialize `TaskbarIndicator` your app indicator state will be cleaned.
 
-use raw_window_handle::RawWindowHandle;
+use raw_window_handle::{RawWindowHandle, RawDisplayHandle};
 
 #[cfg(all(unix, not(target_os = "macos")))]
 #[path = "linux/mod.rs"]
@@ -33,9 +33,9 @@ pub struct TaskbarInterface {
 }
 
 impl TaskbarInterface {
-    pub fn new(window: RawWindowHandle) -> Result<Self, Box<dyn std::error::Error>> {
+    pub fn new(window: RawWindowHandle, display: RawDisplayHandle) -> Result<Self, Box<dyn std::error::Error>> {
         Ok(Self {
-            platform: platform::TaskbarIndicator::new(window)?,
+            platform: platform::TaskbarIndicator::new(window, display)?,
         })
     }
 
