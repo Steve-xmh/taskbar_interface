@@ -13,8 +13,24 @@ categories = ["gui"]
 [dependencies]
 raw-window-handle = "0.5"
 
-[target.'cfg(all(unix, not(target_os="macos")))'.dependencies]
-lazy_static = "1"
+[target.'cfg(target_os = "macos")'.dependencies]
+once_cell = "1.18"
+
+[target.'cfg(target_os = "macos")'.dependencies.icrate]
+version = "0.0.4"
+features = [
+    "AppKit",
+    "AppKit_NSApplication",
+    "AppKit_NSDockTile",
+    "AppKit_NSImage",
+    "AppKit_NSImageView",
+    "AppKit_NSProgressIndicator",
+    "Foundation",
+    "Foundation_NSString",
+]
+
+[target.'cfg(all(unix, not(target_os = "macos")))'.dependencies]
+once_cell = "1.18"
 x11-dl = "2"
 dbus = "0.9"
 x11rb = { version = "0.11", features = ["allow-unsafe-code", "dl-libxcb"] }

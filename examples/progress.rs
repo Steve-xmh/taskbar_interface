@@ -1,6 +1,6 @@
 use std::time::Instant;
 
-use raw_window_handle::{HasRawWindowHandle, HasRawDisplayHandle};
+use raw_window_handle::{HasRawDisplayHandle, HasRawWindowHandle};
 use taskbar_interface::TaskbarInterface;
 use winit::{
     event::{Event, WindowEvent},
@@ -11,7 +11,8 @@ use winit::{
 fn main() {
     let event_loop = EventLoop::new();
     let window = WindowBuilder::new().build(&event_loop).unwrap();
-    let mut indicator = TaskbarInterface::new(window.raw_window_handle(), window.raw_display_handle()).unwrap();
+    let mut indicator =
+        TaskbarInterface::new(window.raw_window_handle(), window.raw_display_handle()).unwrap();
     #[cfg(all(unix, not(target_os = "macos")))]
     let _ = indicator.set_unity_app_uri("application://myapp.desktop");
     let start = Instant::now();

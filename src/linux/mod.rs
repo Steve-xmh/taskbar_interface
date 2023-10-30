@@ -1,4 +1,4 @@
-use raw_window_handle::{RawWindowHandle, RawDisplayHandle};
+use raw_window_handle::{RawDisplayHandle, RawWindowHandle};
 
 use crate::ProgressIndicatorState;
 
@@ -14,7 +14,10 @@ pub struct TaskbarIndicator {
 }
 
 impl TaskbarIndicator {
-    pub fn new(window: RawWindowHandle, display: RawDisplayHandle) -> Result<Self, Box<dyn std::error::Error>> {
+    pub fn new(
+        window: RawWindowHandle,
+        display: RawDisplayHandle,
+    ) -> Result<Self, Box<dyn std::error::Error>> {
         Ok(Self {
             xapps: xapps::Manager::new(window, display),
             unity: None,
@@ -55,7 +58,10 @@ impl TaskbarIndicator {
         &mut self,
         state: ProgressIndicatorState,
     ) -> Result<(), Box<dyn std::error::Error>> {
-        let visible = !matches!(state, ProgressIndicatorState::NoProgress | ProgressIndicatorState::Indeterminate);
+        let visible = !matches!(
+            state,
+            ProgressIndicatorState::NoProgress | ProgressIndicatorState::Indeterminate
+        );
         self.progress_visible = visible;
         if let Some(ref mut xapps) = self.xapps {
             xapps.set_progress_visible(visible)?;

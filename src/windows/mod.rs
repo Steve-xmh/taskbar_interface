@@ -1,6 +1,6 @@
 use std::mem;
 
-use raw_window_handle::{RawWindowHandle, RawDisplayHandle};
+use raw_window_handle::{RawDisplayHandle, RawWindowHandle};
 use windows::Win32::{
     Foundation::HWND,
     System::Com::{CoCreateInstance, CoInitializeEx, CLSCTX_ALL, COINIT_MULTITHREADED},
@@ -9,7 +9,9 @@ use windows::Win32::{
             ITaskbarList3, TaskbarList, TBPF_ERROR, TBPF_INDETERMINATE, TBPF_NOPROGRESS,
             TBPF_NORMAL, TBPF_PAUSED,
         },
-        WindowsAndMessaging::{FlashWindowEx, FLASHWINFO, FLASHW_STOP, FLASHW_TIMERNOFG, FLASHW_TRAY},
+        WindowsAndMessaging::{
+            FlashWindowEx, FLASHWINFO, FLASHW_STOP, FLASHW_TIMERNOFG, FLASHW_TRAY,
+        },
     },
 };
 
@@ -24,7 +26,10 @@ pub struct TaskbarIndicator {
 }
 
 impl TaskbarIndicator {
-    pub fn new(window: RawWindowHandle, _display: RawDisplayHandle) -> Result<Self, Box<dyn std::error::Error>> {
+    pub fn new(
+        window: RawWindowHandle,
+        _display: RawDisplayHandle,
+    ) -> Result<Self, Box<dyn std::error::Error>> {
         let hwnd = match window {
             RawWindowHandle::Win32(handle) => HWND(handle.hwnd as isize),
             h => unimplemented!("{:?}", h),

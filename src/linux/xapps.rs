@@ -12,9 +12,7 @@ use x11rb::{
     xcb_ffi::XCBConnection,
 };
 
-lazy_static! {
-    static ref XLIB: Xlib = Xlib::open().unwrap();
-}
+static XLIB: once_cell::sync::Lazy<Xlib> = once_cell::sync::Lazy::new(|| Xlib::open().unwrap());
 
 pub struct Manager {
     handle: RawWindowHandle,
