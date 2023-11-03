@@ -1,6 +1,5 @@
 use std::ffi::CStr;
 
-use lazy_static::lazy_static;
 use raw_window_handle::{
     RawDisplayHandle, RawWindowHandle, XcbDisplayHandle, XcbWindowHandle, XlibDisplayHandle,
     XlibWindowHandle,
